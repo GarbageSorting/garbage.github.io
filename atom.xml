@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://colrying.github.io</id>
     <title>走向菜鸟的菜鸟</title>
-    <updated>2019-12-02T09:22:53.186Z</updated>
+    <updated>2019-12-02T10:11:07.403Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://colrying.github.io"/>
     <link rel="self" href="https://colrying.github.io/atom.xml"/>
@@ -11,16 +11,25 @@
     <icon>https://colrying.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 走向菜鸟的菜鸟</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://colrying.github.io/post/hello-gridea</id>
-        <link href="https://colrying.github.io/post/hello-gridea">
+        <title type="html"><![CDATA[iOS 苹果APP转让之个人账号转公司账号]]></title>
+        <id>https://colrying.github.io/post/ios-ping-guo-app-zhuan-rang-zhi-ge-ren-zhang-hao-zhuan-gong-si-zhang-hao</id>
+        <link href="https://colrying.github.io/post/ios-ping-guo-app-zhuan-rang-zhi-ge-ren-zhang-hao-zhuan-gong-si-zhang-hao">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        <updated>2019-09-27T10:02:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>起初公司着急上架，临时将APP上架到个人账号下，先公司账号已申请下来，为了兼顾到老用户，需要将个人账号下转移到公司账号下。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        <content type="html"><![CDATA[<p>起初公司着急上架，临时将APP上架到个人账号下，先公司账号已申请下来，为了兼顾到老用户，需要将个人账号下转移到公司账号下。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[iOS音频播放第三方框架FreeStreamer解析。]]></title>
+        <id>https://colrying.github.io/post/ios-yin-pin-bo-fang-di-san-fang-kuang-jia-freestreamer-jie-xi</id>
+        <link href="https://colrying.github.io/post/ios-yin-pin-bo-fang-di-san-fang-kuang-jia-freestreamer-jie-xi">
+        </link>
+        <updated>2018-05-08T01:07:24.000Z</updated>
+        <summary type="html"><![CDATA[<p>新需求要在项目中增加音频播放的功能，原本使用AVPlayer自己写了一个demo实现了音频文件的播放，但是考虑到以后的拓展和内存的优化等问题，决定找找有没有好一点的第三方框架可以使用，于是乎发现了<a href="https://github.com/muhku/FreeStreamer">FreeStreamer</a>。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>新需求要在项目中增加音频播放的功能，原本使用AVPlayer自己写了一个demo实现了音频文件的播放，但是考虑到以后的拓展和内存的优化等问题，决定找找有没有好一点的第三方框架可以使用，于是乎发现了<a href="https://github.com/muhku/FreeStreamer">FreeStreamer</a>。</p>
 ]]></content>
     </entry>
 </feed>

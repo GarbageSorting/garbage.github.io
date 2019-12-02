@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>iOS音频播放第三方框架FreeStreamer解析。 | 走向菜鸟的菜鸟</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://colrying.github.io/favicon.ico?v=1575281450965">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://colrying.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://colrying.github.io">
+        <img src="https://colrying.github.io/images/avatar.png?v=1575281450965" class="site-logo">
+        <h1 class="site-title">走向菜鸟的菜鸟</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://www.jianshu.com/u/1d8bd3d06bfb" target="_blank">简书</a> | <a class="rss" href="https://colrying.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">iOS音频播放第三方框架FreeStreamer解析。</h2>
+            <div class="post-date">2018-05-08</div>
+            
+              <div class="feature-container" style="background-image: url('https://colrying.github.io/post-images/ios-yin-pin-bo-fang-di-san-fang-kuang-jia-freestreamer-jie-xi.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>新需求要在项目中增加音频播放的功能，原本使用AVPlayer自己写了一个demo实现了音频文件的播放，但是考虑到以后的拓展和内存的优化等问题，决定找找有没有好一点的第三方框架可以使用，于是乎发现了<a href="https://github.com/muhku/FreeStreamer">FreeStreamer</a>。</p>
+<!-- more -->
+<p>使用FreeStreamer实现音频播放，音频播放控制，后台播放，后台播放控制等功能。</p>
+<h3 id="一-实现音频播放">一、实现音频播放</h3>
+<ul>
+<li>
+<h6 id="使用cocoapods添加freestreamer库">使用cocoapods添加FreeStreamer库</h6>
+</li>
+</ul>
+<p><code>pod 'FreeStreamer', '~&gt; 3.8.2'</code></p>
+<ul>
+<li>
+<h6 id="导入freestreamer框架">导入FreeStreamer框架</h6>
+</li>
+</ul>
+<p><code>#import &lt;FSAudioStream.h&gt;</code></p>
+<ul>
+<li>
+<h6 id="创建播放类并进行播放音频">创建播放类并进行播放音频</h6>
+</li>
+</ul>
+<pre><code>_audioStream = [[FSAudioStream alloc] init];
+// 播放失败的回调
+_audioStream.onFailure = ^(FSAudioStreamError error,NSString *description){
+            NSLog(@&quot;播放过程中发生错误，错误信息：%@&quot;,description);
+            };
+// 播放完成的回调
+_audioStream.onCompletion=^(){
+            NSLog(@&quot;播放完成!&quot;);
+            };
+// 设置音量
+[_audioStream setVolume:0.5];
+// 使用音频链接URL播放音频
+NSString *urlStr = @&quot;http://up.mcyt.net/down/45957.mp3&quot;;
+NSURL *url = [NSURL URLWithString:urlStr];
+[_audioStream playFromURL:url];
+</code></pre>
+<p>如果出现<code>Strict content type checking active, application/octet-stream is not an audio content type</code>的错误信息，许多服务器也许会给你发送错误的 MIME 类型。这种情况下，FreeStreamer 也许就不能播放这个音频了。如果你想避免 content-type 检查（但是这个 steam 依然是音频文件），你可以设置如下的属性：</p>
+<pre><code>// 不进行检测格式 &lt;开启检测之后，有些网络音频链接无法播放&gt;
+_audioStream.strictContentTypeChecking = NO;
+_audioStream.defaultContentType = @&quot;audio/mpeg&quot;;
+</code></pre>
+<h3 id="二-实现音频的播放控制">二、实现音频的播放控制</h3>
+<ul>
+<li>
+<h6 id="暂停">暂停</h6>
+</li>
+</ul>
+<p>直接调用<code>[self.audioStream pause]</code>即可</p>
+<pre><code>- (void)pauseAction:(id)sender {
+    if (self.audioStream.isPlaying) {
+        [self.audioStream pause];
+    }
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="播放">播放</h6>
+</li>
+</ul>
+<p><code>[self.audioStream play]</code>不是音频暂停之后进行播放，而是初始化完成之后开始播放音频，所以，音频暂停之后继续调用pause方法即可恢复播放。</p>
+<pre><code>- (void)playAction:(id)sender {
+    if (!self.audioStream.isPlaying) {
+        [self.audioStream pause];
+    }
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="上一曲-下一曲">上一曲 / 下一曲</h6>
+</li>
+</ul>
+<p>使用<code>[self.audioStream playFromURL:url]</code>直接切换音频链接即可</p>
+<pre><code>// 上一曲
+- (IBAction)lastMusicAction:(UIButton *)sender {
+    [self.audioStream stop];
+    NSString *urlStr = [NSString stringWithFormat:@&quot;http://up.mcyt.net/down/47541.mp3&quot;, _currentID];
+    NSURL *url=[NSURL URLWithString:urlStr];
+    [self.audioStream playFromURL:url];
+}
+// 下一曲
+- (IBAction)nextMusicAction:(id)sender {
+    [self.audioStream stop];
+    NSString *urlStr = @&quot;http://up.mcyt.net/down/47541.mp3&quot;;
+    NSURL *url=[NSURL URLWithString:urlStr];
+    [self.audioStream playFromURL:url];
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="快进-快退">快进 / 快退</h6>
+</li>
+</ul>
+<p>使用<code>[self.audioStream seekToPosition:position]</code>进行播放进度的切换<br>
+根据不同的状态给<code>UISlider</code>添加不同的<code>addTarget</code>方法：</p>
+<pre><code>[self.progress addTarget:self action:@selector(progressChangeAction:) forControlEvents:(UIControlEventValueChanged)];
+[self.progress addTarget:self action:@selector(progressTouchBeginAction:) forControlEvents:(UIControlEventTouchDown)];
+[self.progress addTarget:self action:@selector(progressTouchEndAction:) forControlEvents:(UIControlEventTouchUpInside)];
+</code></pre>
+<p>实现<code>addTarget</code>方法，实现快进或快退：</p>
+<pre><code>// 进度正在改变
+- (void)progressChangeAction:(UISlider *)slider {
+    float value = slider.value;
+    // 进度 * 总时间 获取当前时间
+    float current = value * _totalTime;
+    // 当前分钟数
+    double minutesElapsed =floor(fmod(current/60.0,60.0));
+    // 当前秒数
+    double secondsElapsed =floor(fmod(current,60.0));
+    // 格式化当前时间
+    NSString *currentTime = [NSString stringWithFormat:@&quot;%02.0f:%02.0f&quot;, minutesElapsed, secondsElapsed];
+    // 改变显示当前时间的标签文字
+    self.currentTimeLabel.text = currentTime;
+}
+// 开始改变进度
+- (void)progressTouchBeginAction:(UISlider *)sender {
+    NSLog(@&quot;开始触摸&quot;);
+    [self removeTimer];
+    // 暂停
+    [self pauseAction:nil];
+}
+// 结束改变进度
+- (void)progressTouchEndAction:(UISlider *)sender {
+    NSLog(@&quot;结束触摸&quot;);
+    [self addTimer];
+    // 播放
+    [self playAction:nil];
+    // 获取进度 0 ~ 1
+    float value = sender.value == 0 ? 0.001 : sender.value;
+    // 创建播放进度对象
+    FSStreamPosition position;
+    // 赋值
+    position.position = value;
+    // 跳转进度
+    [self.audioStream seekToPosition:position];
+}
+</code></pre>
+<p><code>FSStreamPosition</code>是一个结构体，可使用跳转的分钟<code>minute</code>和秒<code>second</code>；跳转的时间总秒数<code>playbackTimeInSeconds</code>；跳转的位置<code>position</code>三种方式进行跳转：</p>
+<pre><code>typedef struct {
+    /**
+     * minute 分钟数
+     * second 秒数    
+     */
+    unsigned minute;
+    unsigned second;
+    
+    /**
+     * Playback time in seconds. 播放时间总秒数
+     */
+    float playbackTimeInSeconds;
+    
+    /**
+     * Position within the stream, where 0 is the beginning
+     * and 1.0 is the end. 播放时间的位置&lt;进度0~1&gt;
+     */
+    float position;
+} FSStreamPosition;
+</code></pre>
+<ul>
+<li>
+<h6 id="动态改变播放进度-播放时间">动态改变播放进度、播放时间</h6>
+</li>
+</ul>
+<p>该方法需要使用定时器持续调用</p>
+<pre><code>- (void)playProgressAction {
+    FSStreamPosition cur = self.audioStream.currentTimePlayed;
+    float playbackTime = cur.playbackTimeInSeconds/1;
+    double minutesElapsed = floor(fmod(playbackTime/60.0,60.0));
+    double secondsElapsed = floor(fmod(playbackTime,60.0));
+    NSString *currentTime = [NSString stringWithFormat:@&quot;%02.0f:%02.0f&quot;, minutesElapsed, secondsElapsed];
+    NSLog(@&quot;当前播放时间：%f&quot;, playbackTime);//播放进度
+    NSLog(@&quot;格式化当前播放时间：%@&quot;, currentTime);
+    // 获取视频的总时长
+    float totalTime = playbackTime / cur.position;
+    // 记录音频总时间
+    _totalTime = totalTime;
+    NSLog(@&quot;总时间：%f&quot;, totalTime);
+    if ([[NSString stringWithFormat:@&quot;%f&quot;,totalTime] isEqualToString:@&quot;nan&quot;]) {
+        NSLog(@&quot;格式化总时间：00:00&quot;);
+    }else{
+        double minutesElapsed1 =floor(fmod(totalTime/60.0,60.0));
+        double secondsElapsed1 =floor(fmod(totalTime,60.0));
+        NSString *total = [NSString stringWithFormat:@&quot;%02.0f:%02.0f&quot;,minutesElapsed1, secondsElapsed1];
+        NSLog(@&quot;格式化总时间：%@&quot;, total);
+        // 改变当前播放时间和音频总时间的显示
+        self.currentTimeLabel.text = currentTime;
+        self.totalTimeLabel.text = total;
+    }
+    float  prebuffer = (float)self.audioStream.prebufferedByteCount;
+    float contentlength = (float)self.audioStream.contentLength;
+    if (contentlength&gt;0) {
+        NSLog(@&quot;缓存进度：%f&quot;, prebuffer / contentlength);
+        // 改变播放进度
+        self.progress.value = cur.position;
+    }
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="调节音量">调节音量</h6>
+</li>
+</ul>
+<p>给调节音量的<code>UISlider</code>添加<code>addTarget</code>方法：</p>
+<pre><code>[self.valumSlider addTarget:self action:@selector(valumChangeAction:) forControlEvents:(UIControlEventValueChanged)];
+</code></pre>
+<p>实现调节音量的方法：</p>
+<pre><code>- (void)valumChangeAction:(UISlider *)slider {
+    self.audioStream.volume = slider.value;
+}
+</code></pre>
+<h3 id="三-实现后台播放">三、实现后台播放</h3>
+<ul>
+<li>
+<h6 id="打开后台模式">打开后台模式</h6>
+</li>
+</ul>
+<p>进入工程TARGETS打开后台模式：<br>
+<img src="https://upload-images.jianshu.io/upload_images/2213065-a887761cf6c4bb54.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开后台模式.jpeg"></p>
+<ul>
+<li>
+<h6 id="检查infoplist是否自动生成后台播放标签">检查info.plist是否自动生成后台播放标签</h6>
+</li>
+</ul>
+<p>打开后台模式之后，在<code>info.plist</code>文件中自动生成<code>Required background modes</code>标签：<br>
+<img src="https://upload-images.jianshu.io/upload_images/2213065-a6c439483bb78494.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="info.jpeg"><br>
+至此，返回后台已经可以继续播放音频了。</p>
+<ul>
+<li>
+<h6 id="添加后台播放任务">添加后台播放任务</h6>
+</li>
+</ul>
+<p>以上配置完成之后，在进入后台播放一段时间后，还是会被系统停止音频播放，此时还应在<code>AppDelegate.m</code>中开启后台任务。</p>
+<pre><code>@interface AppDelegate ()
+{
+    UIBackgroundTaskIdentifier _bgTaskId;
+}
+@end
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    //开启后台处理多媒体事件
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    AVAudioSession *session=[AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    //后台播放
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    //这样做，可以在按home键进入后台后 ，播放一段时间，几分钟吧。但是不能持续播放网络歌曲，若需要持续播放网络歌曲，还需要申请后台任务id，具体做法是：
+    _bgTaskId=[AppDelegate backgroundPlayerID:_bgTaskId];
+    //其中的_bgTaskId是后台任务UIBackgroundTaskIdentifier _bgTaskId;
+}
+
++ (UIBackgroundTaskIdentifier)backgroundPlayerID:(UIBackgroundTaskIdentifier)backTaskId {
+    //设置并激活音频会话类别
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+    //允许应用程序接收远程控制
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    //设置后台任务ID
+    UIBackgroundTaskIdentifier newTaskId = UIBackgroundTaskInvalid;
+    newTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+    if(newTaskId != UIBackgroundTaskInvalid &amp;&amp; backTaskId != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:backTaskId];
+    }
+    return newTaskId;
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="优化后台播放可能遇到的问题">优化后台播放可能遇到的问题</h6>
+</li>
+</ul>
+<p>后台播放时可能会出现<code>[avas] AVAudioSession.mm:1074:-[AVAudioSession setActive:withOptions:error:]: Deactivating an audio session that has running I/O. All I/O should be stopped or paused prior to deactivating the audio session.</code>的错误信息，解决办法可查看<a href="https://www.jianshu.com/p/13d32c78f47b">这篇文章</a>。</p>
+<h3 id="四-线控及锁屏信息">四、线控及锁屏信息</h3>
+<ul>
+<li>
+<h6 id="配置第一响应者">配置第一响应者</h6>
+</li>
+</ul>
+<p>让播放控制类成为第一响应者，后台的控制在该类中响应：</p>
+<pre><code>- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //以及设置app支持接受远程控制事件代码。设置app支持接受远程控制事件，
+    
+    //其实就是在dock中可以显示应用程序图标，同时点击该图片时，打开app。
+    
+    //或者锁屏时，双击home键，屏幕上方出现应用程序播放控制按钮。
+    
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+    [self becomeFirstResponder]; //成为FristResponder
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    
+    [self resignFirstResponder];
+    
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="接收远程控制信息">接收远程控制信息</h6>
+</li>
+</ul>
+<p>实现远程控制接收事件，进行区分事件的类别，响应不同的操作：</p>
+<pre><code>- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+    if (event.type == UIEventTypeRemoteControl) {
+        switch (event.subtype) {
+            // 播放
+            case UIEventSubtypeRemoteControlPlay:
+            {
+                [self playAction:nil];
+            }
+                break;
+            // 暂停
+            case UIEventSubtypeRemoteControlPause:
+            {
+                [self pauseAction:nil];
+            }
+                break;
+            // 停止播放
+            case UIEventSubtypeRemoteControlStop:
+            {
+                [self.audioStream stop];
+            }
+                break;
+            // 播放下一曲按钮
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                [self nextMusicAction:nil];
+            }
+                break;
+            // 播放上一曲按钮
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                [self lastMusicAction:nil];
+            }
+                break;
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+            {
+                if (self.audioStream.isPlaying) {
+                    [self pauseAction:nil];
+                } else {
+                    [self playAction:nil];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>
+<h6 id="修改锁屏界面音频信息">修改锁屏界面音频信息</h6>
+</li>
+</ul>
+<p>当前音频开始播放及时修改信息。</p>
+<pre><code>// 改变锁屏歌曲信息
+- (void)setLockScreenNowPlayingInfo {
+    
+    //更新锁屏时的歌曲信息
+    if (NSClassFromString(@&quot;MPNowPlayingInfoCenter&quot;)) {
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        // 歌曲名
+        [dict setObject:@&quot;体面&quot; forKey:MPMediaItemPropertyTitle];
+        // 演唱者
+        [dict setObject:@&quot;于文文&quot; forKey:MPMediaItemPropertyArtist];
+        // 专辑名
+        [dict setObject:@&quot;专辑《体面》&quot; forKey:MPMediaItemPropertyAlbumTitle];
+        
+        //专辑缩略图
+        UIImage *newImage = [UIImage imageNamed:@&quot;音乐&quot;];
+        [dict setObject:[[MPMediaItemArtwork alloc] initWithImage:newImage] forKey:MPMediaItemPropertyArtwork];
+        
+        //设置锁屏状态下屏幕显示播放音乐信息
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
+        
+    }
+    
+}
+
+</code></pre>
+<ul>
+<li>
+<h6 id="修改锁屏界面音频的播放进度">修改锁屏界面音频的播放进度</h6>
+</li>
+</ul>
+<p>需要在修改音频播放进度条的方法中动态调用该方法，以动态改变锁屏界面的播放进度。</p>
+<pre><code>/**
+ 定时器修改进度
+
+ @param duration 总时间
+ @param current 当前时间
+ */
+- (void)changeLockProgress:(NSInteger)duration current:(NSInteger)current {
+    if(self.audioStream.isPlaying) {
+        
+        //当前播放时间
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo]];
+        // 歌曲总时长
+        [dict setObject:@(duration) forKey:MPMediaItemPropertyPlaybackDuration];
+        // 当前播放时间
+        [dict setObject:@(current) forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
+        
+    }
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://colrying.github.io/tag/z6T_1ZC-Z" class="tag">
+                    Object-C
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
