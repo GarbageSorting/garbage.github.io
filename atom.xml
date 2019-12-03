@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://garbage.github.io</id>
-    <title>郑州垃圾分类专家</title>
-    <updated>2019-12-03T06:42:00.597Z</updated>
+    <title>郑州垃圾分类</title>
+    <updated>2019-12-03T06:43:25.476Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://garbage.github.io"/>
     <link rel="self" href="https://garbage.github.io/atom.xml"/>
-    <subtitle>您身边的生活好帮手</subtitle>
+    <subtitle>垃圾分类专家，您身边的生活好帮手</subtitle>
     <logo>https://garbage.github.io/images/avatar.png</logo>
     <icon>https://garbage.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, 郑州垃圾分类专家</rights>
+    <rights>All rights reserved 2019, 郑州垃圾分类</rights>
     <entry>
         <title type="html"><![CDATA[垃圾分类，我们要做的还有很多... ]]></title>
         <id>https://garbage.github.io/post/la-ji-fen-lei-wo-men-yao-zuo-de-huan-you-hen-duo</id>
