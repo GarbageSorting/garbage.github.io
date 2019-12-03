@@ -1,99 +1,105 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<meta charset="utf-8" >
+
 <title>iOS音频播放第三方框架FreeStreamer解析。 | 郑州垃圾分类专家</title>
-<meta name="description" content="您身边的生活好帮手" />
-<link rel="shortcut icon" href="https://garbage.github.io/favicon.ico?v=1575354127829">
+<meta name="description" content="您身边的生活好帮手">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://garbage.github.io/favicon.ico?v=1575355044359">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://garbage.github.io/styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://garbage.github.io">
-  <img class="avatar" src="https://garbage.github.io/images/avatar.png?v=1575354127829" alt="">
-  </a>
-  <h1 class="site-title">
-    郑州垃圾分类专家
-  </h1>
-  <p class="site-description">
-    您身边的生活好帮手
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://garbage.github.io">
+        <img class="avatar" src="https://garbage.github.io/images/avatar.png?v=1575355044359" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://garbage.github.io">
+        <h1 class="site-title">郑州垃圾分类专家</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              iOS音频播放第三方框架FreeStreamer解析。
-            </h2>
-            <div class="post-info">
-              <span>
-                2018-05-08
-              </span>
-              <span>
-                10 min read
-              </span>
-              
-                <a href="https://garbage.github.io/tag/z6T_1ZC-Z" class="post-tag">
-                  # Object-C
-                </a>
-              
+          
+            <div class="feature-container" style="background-image: url('https://garbage.github.io/post-images/ios-yin-pin-bo-fang-di-san-fang-kuang-jia-freestreamer-jie-xi.jpg')">
             </div>
+          
+          <h2 class="post-title">iOS音频播放第三方框架FreeStreamer解析。</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2018-05-08</span>
             
-              <img class="post-feature-image" src="https://garbage.github.io/post-images/ios-yin-pin-bo-fang-di-san-fang-kuang-jia-freestreamer-jie-xi.jpg" alt="">
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://garbage.github.io/tag/z6T_1ZC-Z">
+                    Object-C
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>新需求要在项目中增加音频播放的功能，原本使用AVPlayer自己写了一个demo实现了音频文件的播放，但是考虑到以后的拓展和内存的优化等问题，决定找找有没有好一点的第三方框架可以使用，于是乎发现了<a href="https://github.com/muhku/FreeStreamer">FreeStreamer</a>。</p>
+          </div>
+          <div class="post-content">
+            <p>新需求要在项目中增加音频播放的功能，原本使用AVPlayer自己写了一个demo实现了音频文件的播放，但是考虑到以后的拓展和内存的优化等问题，决定找找有没有好一点的第三方框架可以使用，于是乎发现了<a href="https://github.com/muhku/FreeStreamer">FreeStreamer</a>。</p>
 <!-- more -->
 <p>使用FreeStreamer实现音频播放，音频播放控制，后台播放，后台播放控制等功能。</p>
 <h3 id="一-实现音频播放">一、实现音频播放</h3>
@@ -509,104 +515,49 @@ _audioStream.defaultContentType = @&quot;audio/mpeg&quot;;
 }
 </code></pre>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#%E4%B8%80-%E5%AE%9E%E7%8E%B0%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE">一、实现音频播放</a><br>
-*<br>
-*<br>
-* <a href="#%E4%BD%BF%E7%94%A8cocoapods%E6%B7%BB%E5%8A%A0freestreamer%E5%BA%93">使用cocoapods添加FreeStreamer库</a><br>
-* <a href="#%E5%AF%BC%E5%85%A5freestreamer%E6%A1%86%E6%9E%B6">导入FreeStreamer框架</a><br>
-* <a href="#%E5%88%9B%E5%BB%BA%E6%92%AD%E6%94%BE%E7%B1%BB%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%92%AD%E6%94%BE%E9%9F%B3%E9%A2%91">创建播放类并进行播放音频</a></li>
-<li><a href="#%E4%BA%8C-%E5%AE%9E%E7%8E%B0%E9%9F%B3%E9%A2%91%E7%9A%84%E6%92%AD%E6%94%BE%E6%8E%A7%E5%88%B6">二、实现音频的播放控制</a><br>
-*<br>
-*<br>
-* <a href="#%E6%9A%82%E5%81%9C">暂停</a><br>
-* <a href="#%E6%92%AD%E6%94%BE">播放</a><br>
-* <a href="#%E4%B8%8A%E4%B8%80%E6%9B%B2-%E4%B8%8B%E4%B8%80%E6%9B%B2">上一曲 / 下一曲</a><br>
-* <a href="#%E5%BF%AB%E8%BF%9B-%E5%BF%AB%E9%80%80">快进 / 快退</a><br>
-* <a href="#%E5%8A%A8%E6%80%81%E6%94%B9%E5%8F%98%E6%92%AD%E6%94%BE%E8%BF%9B%E5%BA%A6-%E6%92%AD%E6%94%BE%E6%97%B6%E9%97%B4">动态改变播放进度、播放时间</a><br>
-* <a href="#%E8%B0%83%E8%8A%82%E9%9F%B3%E9%87%8F">调节音量</a></li>
-<li><a href="#%E4%B8%89-%E5%AE%9E%E7%8E%B0%E5%90%8E%E5%8F%B0%E6%92%AD%E6%94%BE">三、实现后台播放</a><br>
-*<br>
-*<br>
-* <a href="#%E6%89%93%E5%BC%80%E5%90%8E%E5%8F%B0%E6%A8%A1%E5%BC%8F">打开后台模式</a><br>
-* <a href="#%E6%A3%80%E6%9F%A5infoplist%E6%98%AF%E5%90%A6%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%90%8E%E5%8F%B0%E6%92%AD%E6%94%BE%E6%A0%87%E7%AD%BE">检查info.plist是否自动生成后台播放标签</a><br>
-* <a href="#%E6%B7%BB%E5%8A%A0%E5%90%8E%E5%8F%B0%E6%92%AD%E6%94%BE%E4%BB%BB%E5%8A%A1">添加后台播放任务</a><br>
-* <a href="#%E4%BC%98%E5%8C%96%E5%90%8E%E5%8F%B0%E6%92%AD%E6%94%BE%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">优化后台播放可能遇到的问题</a></li>
-<li><a href="#%E5%9B%9B-%E7%BA%BF%E6%8E%A7%E5%8F%8A%E9%94%81%E5%B1%8F%E4%BF%A1%E6%81%AF">四、线控及锁屏信息</a><br>
-*<br>
-*<br>
-* <a href="#%E9%85%8D%E7%BD%AE%E7%AC%AC%E4%B8%80%E5%93%8D%E5%BA%94%E8%80%85">配置第一响应者</a><br>
-* <a href="#%E6%8E%A5%E6%94%B6%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%BF%A1%E6%81%AF">接收远程控制信息</a><br>
-* <a href="#%E4%BF%AE%E6%94%B9%E9%94%81%E5%B1%8F%E7%95%8C%E9%9D%A2%E9%9F%B3%E9%A2%91%E4%BF%A1%E6%81%AF">修改锁屏界面音频信息</a><br>
-* <a href="#%E4%BF%AE%E6%94%B9%E9%94%81%E5%B1%8F%E7%95%8C%E9%9D%A2%E9%9F%B3%E9%A2%91%E7%9A%84%E6%92%AD%E6%94%BE%E8%BF%9B%E5%BA%A6">修改锁屏界面音频的播放进度</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
+      </div>
 
-        
+      
 
-        <div class="site-footer">
-  Powered by <a href="https://www.jianshu.com/u/1d8bd3d06bfb" target="_blank">简书</a> | 
-  <a class="rss" href="https://garbage.github.io/atom.xml" target="_blank">RSS</a>
+      <div class="site-footer">
+  <div class="slogan">您身边的生活好帮手</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://www.jianshu.com/u/1d8bd3d06bfb" target="_blank">简书</a> | <a class="rss" href="https://garbage.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+    </div>
+    <script type="application/javascript">
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+hljs.initHighlightingOnLoad()
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>
