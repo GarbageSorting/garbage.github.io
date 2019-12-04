@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://garbagesorting.github.io</id>
     <title>郑州垃圾分类</title>
-    <updated>2019-12-04T01:17:47.203Z</updated>
+    <updated>2019-12-04T01:22:47.807Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://garbagesorting.github.io"/>
     <link rel="self" href="https://garbagesorting.github.io/atom.xml"/>
@@ -16,6 +16,14 @@
         <link href="https://garbagesorting.github.io/post/guan-xuan-zheng-zhou-shi-ming-que-la-ji-fen-lei-zhi-fa-xia-yue-qi-jiang-zheng-shi-chu-fa">
         </link>
         <updated>2019-12-04T01:14:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>大河报·大河客户端记者 丁丰林 摄影 张琮<br>
+阅读提示<br>
+从郑州市正式启动垃圾分类，到《郑州市城市生活垃圾分类管理办法》正式施行，已经有近两年时间。从大河报记者前期走访试点小区的情况来看，郑州市民对垃圾分类的知晓率是非常高了，几乎达到百分之百。但是，居民的参与率并不高，有不少居民直言自己不愿意参与垃圾分类，原因诸如会很麻烦、会增加成本，包括时间成本和经济成本等。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>大河报·大河客户端记者 丁丰林 摄影 张琮<br>
+阅读提示<br>
+从郑州市正式启动垃圾分类，到《郑州市城市生活垃圾分类管理办法》正式施行，已经有近两年时间。从大河报记者前期走访试点小区的情况来看，郑州市民对垃圾分类的知晓率是非常高了，几乎达到百分之百。但是，居民的参与率并不高，有不少居民直言自己不愿意参与垃圾分类，原因诸如会很麻烦、会增加成本，包括时间成本和经济成本等。</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[垃圾分类，我们要做的还有很多... ]]></title>
