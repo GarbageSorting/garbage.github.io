@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://garbagesorting.github.io</id>
     <title>郑州垃圾分类</title>
-    <updated>2019-12-04T01:22:47.807Z</updated>
+    <updated>2019-12-06T01:09:24.505Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://garbagesorting.github.io"/>
     <link rel="self" href="https://garbagesorting.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://garbagesorting.github.io/images/avatar.png</logo>
     <icon>https://garbagesorting.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 郑州垃圾分类</rights>
+    <entry>
+        <title type="html"><![CDATA[七问郑州垃圾分类]]></title>
+        <id>https://garbagesorting.github.io/post/qi-wen-zheng-zhou-la-ji-fen-lei</id>
+        <link href="https://garbagesorting.github.io/post/qi-wen-zheng-zhou-la-ji-fen-lei">
+        </link>
+        <updated>2019-12-06T01:07:31.000Z</updated>
+        <summary type="html"><![CDATA[<p>11月6日，大河网记者从郑州市城市管理局召开的新闻发布会上获悉，12月1日起《郑州市城市生活垃圾分类管理办法》(以下简称《办法》)正式施行，对不按要求投放并拒不改正的，个人罚款50元、单位最高罚款3000元。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>11月6日，大河网记者从郑州市城市管理局召开的新闻发布会上获悉，12月1日起《郑州市城市生活垃圾分类管理办法》(以下简称《办法》)正式施行，对不按要求投放并拒不改正的，个人罚款50元、单位最高罚款3000元。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[官宣！郑州市明确：垃圾分类执法，下月起将正式处罚]]></title>
         <id>https://garbagesorting.github.io/post/guan-xuan-zheng-zhou-shi-ming-que-la-ji-fen-lei-zhi-fa-xia-yue-qi-jiang-zheng-shi-chu-fa</id>
